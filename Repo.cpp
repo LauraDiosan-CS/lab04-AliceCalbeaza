@@ -1,33 +1,16 @@
-#include "domain.h"
-#include <string.h>
-
-Repo::Repo() {
-	this->n = 0;
+#include <iostream>
+#include "Repo.h"
+#include "Exam.h"
+void Repo::addExam(Exam exam){
+    exams.push_back(exam);
 }
-Repo::~Repo() {
-    this->n = 0;
-}
-void Repo::addExam(Exam e) {
-    this->exams[this->n++] = e;
-}
-
-Exam* Repo::getAll() {
-    return this->exams;
-}
-
-int Repo::getSize()
-{
-    return this->n;
-}
-void Repo::setBonus(char *student_name)
-{
-    int i;
-    for(i=0; i<this->n; i++)
-    {
-        if( strcmp(this->exams[i].getStudentName(), student_name) == 0 )
-        {
-            this->exams[i].setBonus(true);
+void Repo::setBonusForStudent(std::string student_name){
+    for( auto& exam : this->exams ) {
+        if( student_name == exam.getStudentName() ){
+            exam.setBonus(true);
         }
-
     }
+}
+std::vector<Exam> Repo::getAll(){
+    return exams;
 }
